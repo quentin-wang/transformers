@@ -53,6 +53,9 @@ jobs:
         run: |
           echo "HIP: $HIP_VISIBLE_DEVICES"
           echo "ROCR: $ROCR_VISIBLE_DEVICES"
+      - name: ROCMINFO
+        run: |
+          rocminfo  | grep "Agent" -A 14
 
   setup:
     name: Setup
@@ -96,7 +99,9 @@ jobs:
         run: |
           echo "HIP: $HIP_VISIBLE_DEVICES"
           echo "ROCR: $ROCR_VISIBLE_DEVICES"
-
+      - name: ROCMINFO
+        run: |
+          rocminfo  | grep "Agent" -A 14
   run_tests_single_gpu:
     name: Single GPU tests
     strategy:
