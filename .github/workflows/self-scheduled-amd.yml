@@ -131,6 +131,10 @@ jobs:
         working-directory: /transformers
         run: |
           python3 utils/print_env.py
+
+      - name: ROCMINFO
+        run: |
+          rocminfo  | grep "Agent" -A 14
           
       - name: Update clone
         working-directory: /transformers
