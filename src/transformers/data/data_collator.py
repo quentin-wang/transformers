@@ -109,6 +109,7 @@ def torch_default_data_collator(features: List[InputDataClass]) -> Dict[str, Any
         features = [vars(f) for f in features]
     first = features[0]
     batch = {}
+    print(f"+++ torch_default_data_collator, features {features}")
 
     # Special handling for labels.
     # Ensure that tensor is created with the correct type
