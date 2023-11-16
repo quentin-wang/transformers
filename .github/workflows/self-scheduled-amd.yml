@@ -127,6 +127,11 @@ jobs:
           echo "$matrix_folders"
           echo "matrix_folders=$matrix_folders" >> $GITHUB_ENV
 
+      - name: Environment
+        working-directory: /transformers
+        run: |
+          python3 utils/print_env.py
+          
       - name: Update clone
         working-directory: /transformers
         run: git fetch && git checkout ${{ github.sha }}
