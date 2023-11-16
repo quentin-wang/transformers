@@ -2704,6 +2704,8 @@ class Trainer:
             labels = inputs.pop("labels")
         else:
             labels = None
+        print(f"+++inputs: {inputs.keys()}")
+
         outputs = model(**inputs)
         # Save past state if it exists
         # TODO: this needs to be fixed and made cleaner later.
