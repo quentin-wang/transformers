@@ -795,6 +795,7 @@ class Trainer:
                     if self.args.length_column_name in self.train_dataset.column_names
                     else None
                 )
+                print(f"+++_get_train_sampler lengths {lengths} {self.train_dataset.column_names}")
             else:
                 lengths = None
             model_input_name = self.tokenizer.model_input_names[0] if self.tokenizer is not None else None
