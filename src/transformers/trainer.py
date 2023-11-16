@@ -1813,6 +1813,8 @@ class Trainer:
 
             step = -1
             for step, inputs in enumerate(epoch_iterator):
+                print(f"+++transformers, inputs: {inputs.keys()}")
+
                 total_batched_samples += 1
                 if rng_to_sync:
                     self._load_rng_state(resume_from_checkpoint)
@@ -2704,8 +2706,6 @@ class Trainer:
             labels = inputs.pop("labels")
         else:
             labels = None
-        print(f"+++inputs: {inputs.keys()}")
-
         outputs = model(**inputs)
         # Save past state if it exists
         # TODO: this needs to be fixed and made cleaner later.
