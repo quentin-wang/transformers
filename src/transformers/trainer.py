@@ -824,13 +824,11 @@ class Trainer:
         train_dataset = self.train_dataset
         data_collator = self.data_collator
 
-        print(f"+++dataset.column_names: {train_dataset.column_names}")
         if is_datasets_available() and isinstance(train_dataset, datasets.Dataset):
             train_dataset = self._remove_unused_columns(train_dataset, description="training")
         else:
             data_collator = self._get_collator_with_removed_columns(data_collator, description="training")
-
-        print(f"+++dataset.column_names after remove unused: {train_dataset.column_names}")
+        # print(f"+++dataset.column_names after remove unused: {train_dataset.column_names}")
 
         dataloader_params = {
             "batch_size": self._train_batch_size,
