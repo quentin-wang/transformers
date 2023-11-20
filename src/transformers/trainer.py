@@ -735,7 +735,7 @@ class Trainer:
         if self._signature_columns is None:
             # Inspect model forward signature to keep only the arguments it accepts.
             signature = inspect.signature(self.model.forward)
-            print(f"+++_set_signature_columns_if_needed: {signature}")
+            print(f"+++_set_signature_columns_if_needed: {signature.parameters.keys()}")
             self._signature_columns = list(signature.parameters.keys())
             # Labels may be named label or label_ids, the default data collator handles that.
             self._signature_columns += list(set(["label", "label_ids"] + self.label_names))
@@ -826,7 +826,6 @@ class Trainer:
             raise ValueError("Trainer: training requires a train_dataset.")
 
         train_dataset = self.train_dataset
-        print(f"+++train_dataset.__getitem__: {train_dataset.__getitem__(0)}")
         data_collator = self.data_collator
 
         if is_datasets_available() and isinstance(train_dataset, datasets.Dataset):
