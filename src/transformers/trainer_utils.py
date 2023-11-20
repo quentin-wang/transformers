@@ -686,7 +686,7 @@ class RemoveColumnsCollator:
         self.model_name = model_name
         self.message_logged = False
 
-    print(f"+++self.signature_columns: {signature_columns}")
+        print(f"+++self.signature_columns: {signature_columns}")
 
     def _remove_columns(self, feature: dict) -> dict:
         if not isinstance(feature, dict):
