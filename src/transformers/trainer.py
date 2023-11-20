@@ -735,6 +735,7 @@ class Trainer:
         if self._signature_columns is None:
             # Inspect model forward signature to keep only the arguments it accepts.
             signature = inspect.signature(self.model.forward)
+            print(f"+++_set_signature_columns_if_needed: {signature}")
             self._signature_columns = list(signature.parameters.keys())
             # Labels may be named label or label_ids, the default data collator handles that.
             self._signature_columns += list(set(["label", "label_ids"] + self.label_names))
@@ -755,8 +756,8 @@ class Trainer:
                 " you can safely ignore this message."
             )
 
-        print(f"+++self.signature_columns: {signature_columns}")
-        print(f"+++ignored_columns: {ignored_columns}")
+        # print(f"+++self.signature_columns: {signature_columns}")
+        # print(f"+++ignored_columns: {ignored_columns}")
 
         columns = [k for k in signature_columns if k in dataset.column_names]
 
