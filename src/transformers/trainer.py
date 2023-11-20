@@ -755,6 +755,9 @@ class Trainer:
                 " you can safely ignore this message."
             )
 
+        print(f"+++self.signature_columns: {signature_columns}")
+        print(f"+++ignored_columns: {ignored_columns}")
+
         columns = [k for k in signature_columns if k in dataset.column_names]
 
         if version.parse(datasets.__version__) < version.parse("1.4.0"):
