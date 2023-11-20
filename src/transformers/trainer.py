@@ -822,7 +822,7 @@ class Trainer:
             raise ValueError("Trainer: training requires a train_dataset.")
 
         train_dataset = self.train_dataset
-        print(f"{train_dataset.__getitem__(0)}")
+        print(f"+++train_dataset.__getitem__: {train_dataset.__getitem__(0)}")
         data_collator = self.data_collator
 
         if is_datasets_available() and isinstance(train_dataset, datasets.Dataset):

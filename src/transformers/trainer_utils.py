@@ -686,6 +686,8 @@ class RemoveColumnsCollator:
         self.model_name = model_name
         self.message_logged = False
 
+    print(f"+++self.signature_columns: {signature_columns}")
+
     def _remove_columns(self, feature: dict) -> dict:
         if not isinstance(feature, dict):
             return feature
@@ -700,6 +702,8 @@ class RemoveColumnsCollator:
                     " you can safely ignore this message."
                 )
                 self.message_logged = True
+                print(f"+++ignored_columns: {ignored_columns}")
+
         return {k: v for k, v in feature.items() if k in self.signature_columns}
 
     def __call__(self, features: List[dict]):
