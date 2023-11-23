@@ -247,7 +247,7 @@ class DataCollatorWithPadding:
     return_tensors: str = "pt"
 
     def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
-        # print(f"+++DataCollatorWithPadding, features {features}")
+        print(f"+++DataCollatorWithPadding, features {features}")
         batch = self.tokenizer.pad(
             features,
             padding=self.padding,
