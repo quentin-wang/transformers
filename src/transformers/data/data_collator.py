@@ -247,7 +247,12 @@ class DataCollatorWithPadding:
     return_tensors: str = "pt"
 
     def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
-        print(f"+++DataCollatorWithPadding, features {features}")
+        import torch
+        print(f"+++DataCollatorWithPadding, features")
+        if features.get('visual_dict', None):
+            visual_dict = features.pop('visual_dict') # collate([d[key] for d in batch]
+            visual_dict = {key: torch.stack(visual_dict[key],0) for key in visual_dict}
+
         batch = self.tokenizer.pad(
             features,
             padding=self.padding,
@@ -261,6 +266,9 @@ class DataCollatorWithPadding:
         if "label_ids" in batch:
             batch["labels"] = batch["label_ids"]
             del batch["label_ids"]
+        
+        if features.get('visual_dict', None):
+            batch["visual_dict"] = visual_dict
         return batch
 
 
