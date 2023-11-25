@@ -248,10 +248,19 @@ class DataCollatorWithPadding:
 
     def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
         import torch
+        from collections import defaultdict
         print(f"+++DataCollatorWithPadding, features")
-        if features.get('visual_dict', None):
-            visual_dict = features.pop('visual_dict') # collate([d[key] for d in batch]
+        visual_dict_list = []
+        visual_dict = defaultdict(list)
+        if features[0].get('visual_dict', None):
+            for sample in features:
+                visual_dict_list.append(sample.pop('visual_dict'))   # collate([d[key] for d in batch]
+                # visual_dict = {key: torch.stack(visual_dict[key],0) for key in visual_dict}
+            for sample in visual_dict_list:
+                for key in sample:
+                    visual_dict[key].append(sample[key])
             visual_dict = {key: torch.stack(visual_dict[key],0) for key in visual_dict}
+
 
         batch = self.tokenizer.pad(
             features,
@@ -267,7 +276,7 @@ class DataCollatorWithPadding:
             batch["labels"] = batch["label_ids"]
             del batch["label_ids"]
         
-        if features.get('visual_dict', None):
+        if features[0].get('visual_dict', None):
             batch["visual_dict"] = visual_dict
         return batch
 
