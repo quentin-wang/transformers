@@ -1821,7 +1821,7 @@ class Trainer:
 
             step = -1
             for step, inputs in enumerate(epoch_iterator):
-                print(f"+++transformers, inputs: {inputs.keys()}")
+                # print(f"+++transformers, inputs: {inputs.keys()}")
 
                 total_batched_samples += 1
                 if rng_to_sync:

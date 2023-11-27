@@ -249,7 +249,7 @@ class DataCollatorWithPadding:
     def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
         import torch
         from collections import defaultdict
-        print(f"+++DataCollatorWithPadding, features")
+        # print(f"+++DataCollatorWithPadding, features")
         visual_dict_list = []
         visual_dict = defaultdict(list)
         if features[0].get('visual_dict', None):
@@ -279,8 +279,6 @@ class DataCollatorWithPadding:
         
         if visual_dict_list:
             batch["visual_dict"] = visual_dict
-            print(f"+++ added in batch")
-            print(f"batch: {batch.keys()}")
         return batch
 
 
