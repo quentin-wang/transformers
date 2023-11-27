@@ -260,7 +260,7 @@ class DataCollatorWithPadding:
                 for key in sample:
                     visual_dict[key].append(sample[key])
             visual_dict = {key: torch.stack(visual_dict[key],0) for key in visual_dict}
-            print(f"+++ visual_dict: {visual_dict}")
+            # print(f"+++ visual_dict: {visual_dict}")
 
 
         batch = self.tokenizer.pad(
@@ -277,7 +277,7 @@ class DataCollatorWithPadding:
             batch["labels"] = batch["label_ids"]
             del batch["label_ids"]
         
-        if features[0].get('visual_dict', None):
+        if visual_dict_list:
             batch["visual_dict"] = visual_dict
             print(f"+++ added in batch")
             print(f"batch: {batch.keys()}")
